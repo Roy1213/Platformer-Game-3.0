@@ -1086,6 +1086,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     for accretionDisk in accretionDisks {
                         accretionDisk.blackHoleCenter.x += change
                     }
+                    for center in centers {
+                        center.position.x += change
+                    }
                 }
                 else {
                     let change = player.position.x - cam.position.x + CGFloat(camInitiateFollowX)
@@ -1095,6 +1098,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                     for accretionDisk in accretionDisks {
                         accretionDisk.blackHoleCenter.x += change
+                    }
+                    for center in centers {
+                        center.position.x += change
                     }
                 }
             }
@@ -1116,6 +1122,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     for accretionDisk in accretionDisks {
                         accretionDisk.blackHoleCenter.y += change
                     }
+                    for center in centers {
+                        center.position.y += change
+                    }
                 }
                 else {
                     let change = player.position.y - cam.position.y + CGFloat(camInitiateFollowY)
@@ -1125,6 +1134,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                     for accretionDisk in accretionDisks {
                         accretionDisk.blackHoleCenter.y += change
+                    }
+                    for center in centers {
+                        center.position.y += change
                     }
                 }
             }
