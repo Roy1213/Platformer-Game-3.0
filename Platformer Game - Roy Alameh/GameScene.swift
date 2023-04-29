@@ -245,15 +245,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var accretionDisks = [AccretionDisk]()
     
-    var blackHoleCenters = [CGPoint(x: 300, y: 300), CGPoint(x: 300, y: 300), CGPoint(x: 300, y: 300)]
+    var blackHoleCenters = [CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600)]
     var blackHoleAs = [CGFloat(150), CGFloat(100), CGFloat(80)]
     var blackHoleBs = [CGFloat(30), CGFloat(20), CGFloat(16)]
     var numsOfAccretionDiskStars = [40, 40, 40, 40, 40]
     var angularVelocities = [CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0)]
-    var centerLocations = [CGPoint(x: 300, y: 300)]
+    var centerLocations = [CGPoint(x: 300, y: 600)]
     var centerSizes = [CGFloat(70)]
     var centerColors = [UIColor.darkGray]
     var centers = [SKShapeNode]()
+    var centerZDistance = CGFloat(2500.0)
+    
+    var originalLocationStars = [CGPoint]()
+    var originalLocationBlackHoleCenters = [CGPoint]()
+    var originalLocationCenters = [CGPoint]()
     override func sceneDidLoad() {
         self.view?.preferredFramesPerSecond = 60
         
@@ -750,6 +755,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             body.name = "star"
             body.isHidden = true
             stars.append(Star(distance: z, speedMultiplier: (z + 2000)/10000, body: body))
+            originalLocationStars.append(body.position)
             self.addChild(body)
             numOfStars -= 1
         }
@@ -762,15 +768,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for i in 0..<blackHoleCenters.count {
             var disk = AccretionDisk(starsAccretionDisk: [Star2](), blackHoleCenter: blackHoleCenters[i], blackHoleA: blackHoleAs[i], blackHoleB: blackHoleBs[i],  numOfAccretionDiskStars: numsOfAccretionDiskStars[i], angularVelocity: angularVelocities[i])
             accretionDisks.append(disk)
+            originalLocationBlackHoleCenters.append(disk.blackHoleCenter)
         }
         
         for i in 0..<centerLocations.count {
             var center = SKShapeNode(circleOfRadius: centerSizes[i])
             center.position = centerLocations[i]
+            print(center.position)
             center.fillColor = centerColors[i]
             center.zPosition = -2
             centers.append(center)
             self.addChild(center)
+            originalLocationCenters.append(center.position)
         }
         
         for accretionDisk in accretionDisks {
@@ -872,13 +881,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         torso.zRotation = 0
         
         if fromBegining {
-            player.physicsBody?.angularVelocity    = 0
+            player.physicsBody?.angularVelocity = 0
             player.zRotation                       = 0
             player.physicsBody?.velocity.dx        = 0
             player.physicsBody?.velocity.dy        = 0
             player.position = CGPoint(x: playerStartX , y: playerStartY)
             rightStop()
             leftStop()
+            
+            cam.position = player.position
+            
+            //print("test1")
+            for i in 0..<stars.count {
+                //print("test2")
+                stars[i].body.position = originalLocationStars[i]
+            }
+            for i in 0..<accretionDisks.count {
+                accretionDisks[i].blackHoleCenter = originalLocationBlackHoleCenters[i]
+            }
+            for i in 0..<centers.count {
+                centers[i].position = originalLocationCenters[i]
+            }
         }
         
         player.physicsBody?.categoryBitMask    = playerCategory
@@ -955,6 +978,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         
         //print(player.physicsBody?.mass)
+        for center in centers {
+            print(center.position)
+        }
         
         for star in stars {
             if  star.body.position.x > cam.position.x - self.size.width / 2.0 &&  star.body.position.x < cam.position.x + self.size.width / 2.0 && star.body.position.y > cam.position.y - self.size.width / 2.0 &&  star.body.position.y < cam.position.y + self.size.width / 2.0 {
@@ -1008,19 +1034,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 
             }
         }*/
-        for accretionDisk in accretionDisks {
-            for star in accretionDisk.starsAccretionDisk {
-                star.body.position.x = accretionDisk.blackHoleA * sin(accretionDisk.angularVelocity * star.time) + accretionDisk.blackHoleCenter.x
-                star.body.position.y = accretionDisk.blackHoleB * cos(accretionDisk.angularVelocity  * star.time) + accretionDisk.blackHoleCenter.y
-                star.time += 1.0/60.0
-                if star.body.position.y > accretionDisk.blackHoleCenter.y {
-                    star.body.zPosition = -3
-                }
-                else {
-                    star.body.zPosition = -1
-                }
-            }
-        }
         
 //        for star in stars {
 //            if star.body.position.x > cam.position.x - 100.0 / 2.0 && star.body.position.x < cam.position.x + 100.0 / 2.0 && star.body.position.y > cam.position.y - 100.0 / 2.0 && star.body.position.y < cam.position.y + 100.0 / 2.0 {
@@ -1077,6 +1090,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 for star in stars {
                     star.body.physicsBody?.velocity.dx = -star.speedMultiplier * (player.physicsBody?.velocity.dx)!
                 }
+                for accretionDisk in accretionDisks {
+                    accretionDisk.blackHoleCenter.x -= centerZDistance/10000.0 * (player.physicsBody?.velocity.dx)! * (1.0/60.0)
+                }
+                for center in centers {
+                    center.position.x -= centerZDistance/10000.0 * (player.physicsBody?.velocity.dx)! * (1.0/60.0)
+                }
                 if player.position.x > cam.position.x {
                     let change = player.position.x - cam.position.x - CGFloat(camInitiateFollowX)
                     cam.position.x += change
@@ -1109,9 +1128,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     star.body.physicsBody?.velocity.dx = 0
                 }
             }
+            for center in centers {
+                print(center.position)
+            }
             if abs(player.position.y - cam.position.y) >= CGFloat(camInitiateFollowY) {
+                print("test12")
                 for star in stars {
                     star.body.physicsBody?.velocity.dy = -star.speedMultiplier * (player.physicsBody?.velocity.dy)!
+                }
+                for accretionDisk in accretionDisks {
+                    accretionDisk.blackHoleCenter.y -= centerZDistance/10000.0 * (player.physicsBody?.velocity.dy)! * (1.0/60.0)
+                }
+                for center in centers {
+                    center.position.y -= centerZDistance/10000.0 * (player.physicsBody?.velocity.dy)! * (1.0/60.0)
                 }
                 if player.position.y > cam.position.y {
                     let change = player.position.y - cam.position.y - CGFloat(camInitiateFollowY)
@@ -1148,9 +1177,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         else if inAnimation && !jumpableWallAnimation {
             if (player.position.y <= initialPositionYAnimation - CGFloat(2000)) {
-                initPlayer(fromBegining: true)
-                inAnimation = false
                 lives -= 1
+                if lives > 0 {
+                    initPlayer(fromBegining: true)
+                    inAnimation = false
+                }
                 if (lives == 0) {
                     end(won: false)
                 }
@@ -1277,6 +1308,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             enemy3s[i].physicsBody?.applyForce(CGVector(dx: CGFloat(direction) * CGFloat(enemy3s[i].physicsBody!.mass) * CGFloat(enemy3Acceleration), dy: 0))
         }
         
+        //placement after center movement matters!
+        for accretionDisk in accretionDisks {
+            for star in accretionDisk.starsAccretionDisk {
+                star.body.position.x = accretionDisk.blackHoleA * sin(accretionDisk.angularVelocity * star.time) + accretionDisk.blackHoleCenter.x
+                star.body.position.y = accretionDisk.blackHoleB * cos(accretionDisk.angularVelocity  * star.time) + accretionDisk.blackHoleCenter.y
+                star.time += 1.0/60.0
+                if star.body.position.y > accretionDisk.blackHoleCenter.y {
+                    star.body.zPosition = -3
+                }
+                else {
+                    star.body.zPosition = -1
+                }
+            }
+        }
+        
+        for center in centers {
+            print(originalLocationCenters[0])
+            print(center.position)
+        }
+        
+        for star in stars {
+            if player.position.y < -1000 {
+                star.body.physicsBody?.velocity.dx = 0.0
+                star.body.physicsBody?.velocity.dy = 0.0
+            }
+        }
+        
         
 //        print(head.zRotation)
 //        print(rightLeg.zRotation)
@@ -1359,8 +1417,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         centerPoint.position.y       = cam.position.y
         
         if (player.position.y <= -3000) {
-            initPlayer(fromBegining: true)
             lives -= 1
+            if lives > 0 {
+                initPlayer(fromBegining: true)
+            }
+            
             if (lives == 0) {
                 end(won: false)
             }
