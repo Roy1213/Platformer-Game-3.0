@@ -34,6 +34,7 @@ class Level {
     var centerLocations          : [CGPoint]
     var centerSizes              : [CGFloat]
     var centerColors             : [UIColor]
+    var starColors               : [UIColor]
     var centerZDistance          : CGFloat
     
     init(level : Int) {
@@ -103,133 +104,89 @@ class Level {
             centerLocations          = [CGPoint(x: 300, y: 600)]
             centerSizes              = [CGFloat(70)]
             centerColors             = [UIColor.darkGray]
+            starColors               = [UIColor.yellow, UIColor.yellow, UIColor.yellow]
             centerZDistance          = CGFloat(2500.0)
         }
         else if level == 1 {
-            groundSizes         = [[2000, 100],
-                                       [20, 50],
-                                       [750, 50],
-                                       [60, 20],
-                                       [1000, 20]]
+            groundSizes         = [[200, 20],
+                                   [200, 20],
+                                   [200, 20],
+                                   [200, 20],
+                                   [150, 20],
+                                   [100, 20],
+                                   [50, 20],
+                                   [25, 20],
+                                   [2000, 50]]
             
-            wallSizes           = [[20, 300],
-                                       [20, 300],
-                                       [50, 48],
-                                       [50, 200],
-                                       [50, 150]]
+            wallSizes           = [[20, 200]]
             
-            jumpableWallSizes   = [[20, 1000],
-                                       [20, 1000],
-                                       [20, 1000],
-                                       [50, 1000],
-                                       [50, 800]]
+            jumpableWallSizes   = [[20, 100],
+                                   [20, 100],
+                                   [20, 100]]
             
-            coinPositions   =               [[200, 200],
-                                             [500, 300],
-                                             [600, 400],
-                                             [1000, 600],
-                                             [1100, 700]]
+            coinPositions   =               [[-1000, 0]]
             
-            enemy1Positions =               [[750, 310],
-                                             [2250, 310],
-                                             [2400, 310],
-                                             [2550, 310],
-                                             [2750, 310],
-                                             [2850, 310]]
+            enemy1Positions =               [[-2000, 0]]
             
-            enemy2Positions =               [[3780, 1680]]
+            enemy2Positions =               [[-3000, 0]]
             
-            enemy3Positions =               [[1400, 200]]
+            enemy3Positions =               [[-4000, 0]]
 
-            enemy2Bounds    =               [200]
+            enemy2Bounds    =               [-5000, -4001]
             
-            groundPositions =                     [[1000, 50],
-                                                   [1500, 600],
-                                                   [2525, 300],
-                                                   [2925, 1485],
-                                                   [3870, 1485]]
+            groundPositions =                     [[100, 0],
+                                                   [500, 100],
+                                                   [900, 200],
+                                                   [1300, 300],
+                                                   [1700, 400],
+                                                   [2100, 500],
+                                                   [2500, 600],
+                                                   [2900, 700],
+                                                   [1850, 1560]]
             
-            wallPositions =                       [[500, 100],
-                                                   [1000, 100],
-                                                   [2125, 300],
-                                                   [2175, 375],
-                                                   [2925, 350]]
+            wallPositions =                       [[0, 90]]
             
-            jumpableWallPositions =               [[1500, 100],
-                                                   [1100, 950],
-                                                   [1900, 950],
-                                                   [3400, 975],
-                                                   [2925, 1075]]
+            jumpableWallPositions =               [[3100, 1050],
+                                                   [2700, 1250],
+                                                   [3100, 1450]]
             
-            levelEndPosition =                     [4200, 1550]
+            levelEndPosition =                     [-100, 500]
             
             blackHoleCenters         = [CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600)]
-            blackHoleAs              = [CGFloat(150), CGFloat(100), CGFloat(80)]
-            blackHoleBs              = [CGFloat(30), CGFloat(20), CGFloat(16)]
-            numsOfAccretionDiskStars = [40, 40, 40, 40, 40]
+            blackHoleAs              = [CGFloat(300), CGFloat(200), CGFloat(160)]
+            blackHoleBs              = [CGFloat(60), CGFloat(40), CGFloat(32)]
+            numsOfAccretionDiskStars = [40, 40, 40]
             angularVelocities        = [CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0)]
             centerLocations          = [CGPoint(x: 300, y: 600)]
             centerSizes              = [CGFloat(70)]
-            centerColors             = [UIColor.darkGray]
-            centerZDistance          = CGFloat(2500.0)
+            centerColors             = [UIColor.red]
+            starColors               = [UIColor.blue, UIColor.blue, UIColor.blue]
+            centerZDistance          = CGFloat(3500.0)
         }
         else {
-            groundSizes         = [[2000, 100],
-                                       [20, 50],
-                                       [750, 50],
-                                       [60, 20],
-                                       [1000, 20]]
+            groundSizes         = [[200, 20]]
             
-            wallSizes           = [[20, 300],
-                                       [20, 300],
-                                       [50, 48],
-                                       [50, 200],
-                                       [50, 150]]
+            wallSizes           = [[20, 200]]
             
-            jumpableWallSizes   = [[20, 1000],
-                                       [20, 1000],
-                                       [20, 1000],
-                                       [50, 1000],
-                                       [50, 800]]
+            jumpableWallSizes   = [[0, 0]]
             
-            coinPositions   =               [[200, 200],
-                                             [500, 300],
-                                             [600, 400],
-                                             [1000, 600],
-                                             [1100, 700]]
+            coinPositions   =               [[0, 0]]
             
-            enemy1Positions =               [[750, 310],
-                                             [2250, 310],
-                                             [2400, 310],
-                                             [2550, 310],
-                                             [2750, 310],
-                                             [2850, 310]]
+            enemy1Positions =               [[0, 0]]
             
-            enemy2Positions =               [[3780, 1680]]
+            enemy2Positions =               [[0, 0]]
             
-            enemy3Positions =               [[1400, 200]]
+            enemy3Positions =               [[0, 0]]
 
-            enemy2Bounds    =               [200]
+            enemy2Bounds    =               [0, 0]
             
-            groundPositions =                     [[1000, 50],
-                                                   [1500, 600],
-                                                   [2525, 300],
-                                                   [2925, 1485],
-                                                   [3870, 1485]]
+            groundPositions =                     [[0, 0]]
             
-            wallPositions =                       [[500, 100],
-                                                   [1000, 100],
-                                                   [2125, 300],
-                                                   [2175, 375],
-                                                   [2925, 350]]
+            wallPositions =                       [[0, 0]]
             
-            jumpableWallPositions =               [[1500, 100],
-                                                   [1100, 950],
-                                                   [1900, 950],
-                                                   [3400, 975],
-                                                   [2925, 1075]]
+            jumpableWallPositions =               [[-6000, 0]]
             
-            levelEndPosition =                     [4200, 1550]
+            levelEndPosition =                     [1000, 0]
             
             blackHoleCenters         = [CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600)]
             blackHoleAs              = [CGFloat(150), CGFloat(100), CGFloat(80)]
@@ -239,10 +196,47 @@ class Level {
             centerLocations          = [CGPoint(x: 300, y: 600)]
             centerSizes              = [CGFloat(70)]
             centerColors             = [UIColor.darkGray]
+            starColors               = [UIColor.yellow, UIColor.yellow, UIColor.yellow]
             centerZDistance          = CGFloat(2500.0)
         }
     }
 }
+
+//format for new level data
+
+//groundSizes         = [[200, 20]]
+//
+//wallSizes           = [[20, 200]]
+//
+//jumpableWallSizes   = [[0, 0]]
+//
+//coinPositions   =               [[-1000, 0]]
+//
+//enemy1Positions =               [[-2000, 0]]
+//
+//enemy2Positions =               [[-3000, 0]]
+//
+//enemy3Positions =               [[-4000, 0]]
+//
+//enemy2Bounds    =               [-5000, -4001]
+//
+//groundPositions =                     [[100, 0]]
+//
+//wallPositions =                       [[0, 100]]
+//
+//jumpableWallPositions =               [[-6000, 0]]
+//
+//levelEndPosition =                     [1000, 0]
+//
+//blackHoleCenters         = [CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600)]
+//blackHoleAs              = [CGFloat(150), CGFloat(100), CGFloat(80)]
+//blackHoleBs              = [CGFloat(30), CGFloat(20), CGFloat(16)]
+//numsOfAccretionDiskStars = [40, 40, 40, 40, 40]
+//angularVelocities        = [CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0)]
+//centerLocations          = [CGPoint(x: 300, y: 600)]
+//centerSizes              = [CGFloat(70)]
+//centerColors             = [UIColor.darkGray]
+//centerZDistance          = CGFloat(2500.0)
 
 struct Star {
     var distance           : CGFloat
@@ -302,8 +296,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var camInitiateFollowX = 300
     var camInitiateFollowY = 150
     
-    var playerStartX = 300
-    var playerStartY = 600
+    var playerStartX = 150
+    var playerStartY = 500
     
     let playerCategory         : UInt32 = 0x1 << 0
     let groundCategory         : UInt32 = 0x1 << 1
@@ -316,7 +310,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let levelEndCategory       : UInt32 = 0x1 << 8
     
     let jumpSpeed       = 630
-    let runMaxSpeed     = 400
+    let runMaxSpeed     = 300
     let runAcceleration = 6000
     
     let enemy1Speed           = 200
@@ -418,7 +412,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var jumpableWallAnimation = false
     var xVelocity             : CGFloat = 10.0
-    var horizontalHopVelocity = 500
+    var horizontalHopVelocity = 550
     var wallSlideVelocity     = 100
     
     var firstInit = true
@@ -794,6 +788,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        centerOfMass4.physicsBody?.allowsRotation = false
         //centerOfMass.zRotation = 1
         
+        print(levels[level].coinPositions.count)
         for i in 0..<levels[level].coinPositions.count {
             let coin = SKShapeNode(circleOfRadius: CGFloat(coinRadius))
             coin.physicsBody = SKPhysicsBody(circleOfRadius: CGFloat(coinRadius))
@@ -1006,7 +1001,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for i in 0..<levels[level].centerLocations.count {
             var center = SKShapeNode(circleOfRadius: levels[level].centerSizes[i])
             center.position = levels[level].centerLocations[i]
-            print(center.position)
+            //print(center.position)
             center.fillColor = levels[level].centerColors[i]
             center.zPosition = -2
             centers.append(center)
@@ -1014,12 +1009,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             originalLocationCenters.append(center.position)
         }
         
+        var count = 0
         for accretionDisk in accretionDisks {
-            spawnStar(disk: accretionDisk)
+            spawnStar(disk: accretionDisk, num: count)
+            count += 1
         }
     }
     
-    func spawnStar(disk: AccretionDisk) {
+    func spawnStar(disk: AccretionDisk, num: Int) {
         if (disk.numOfAccretionDiskStars > 0) {
             let body = SKShapeNode(circleOfRadius: 5)
             body.physicsBody = SKPhysicsBody(circleOfRadius: 5)
@@ -1029,7 +1026,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             body.physicsBody?.categoryBitMask = 0
             body.physicsBody?.collisionBitMask = 0
             body.position = CGPoint(x: disk.blackHoleCenter.x, y: disk.blackHoleCenter.y + disk.blackHoleB)
-            body.fillColor = UIColor.yellow
+            body.fillColor = levels[level].starColors[num]
             body.zPosition = -3
             body.name = "star"
             body.isHidden = false
@@ -1042,7 +1039,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.15, execute: {
                 disk.numOfAccretionDiskStars -= 1
-                self.spawnStar(disk: disk)
+                self.spawnStar(disk: disk, num: num)
             })
         }
     }
@@ -1148,7 +1145,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         jumpableWallAnimation = false
         
         if !gameStart {
-            print("test")
+            //print("test")
         }
         
         player.isHidden = true
@@ -1211,7 +1208,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //print(player.physicsBody?.mass)
         for center in centers {
-            print(center.position)
+            //print(center.position)
         }
         
         for star in stars {
@@ -1294,8 +1291,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //            }
 //        }
         
+//        var runMaxSpeed = self.runMaxSpeed
+//        if !touchingGround {
+//            runMaxSpeed /= 2
+//        }
+        //print(player.physicsBody?.velocity.dx)
+        
         if (moveRight || moveLeft) && !inAnimation && canMove {
             var multiplier = 0
+            //print(moveRight && (player.physicsBody?.velocity.dx)! < CGFloat(runMaxSpeed))
             if moveRight && (player.physicsBody?.velocity.dx)! < CGFloat(runMaxSpeed) {
                 multiplier = 1
                 if (player.physicsBody?.velocity.dx)!/abs((player.physicsBody?.velocity.dx)!) == -1 {
@@ -1308,14 +1312,34 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     player.physicsBody?.velocity.dx = 0
                 }
             }
-            player?.physicsBody?.applyForce(CGVector(dx: CGFloat(multiplier * runAcceleration) * (player.physicsBody?.mass ?? 1), dy: 0))
+            player?.physicsBody?.applyForce(CGVector(dx: CGFloat(multiplier * runAcceleration * 2) * (player.physicsBody?.mass ?? 1), dy: 0))
         }
-        else if ((player.physicsBody?.velocity.dx)! > 5 && touchingGround) {
-            player?.physicsBody?.applyForce(CGVector(dx: CGFloat(-1 * runAcceleration) * (player.physicsBody?.mass ?? 1), dy: 0))
+//        else if (player.physicsBody?.velocity.dx)! > 0 && touchingGround {
+//            player?.physicsBody?.applyForce(CGVector(dx: CGFloat(-1 * runAcceleration) * (player.physicsBody?.mass ?? 1), dy: 0))
+//        }
+//        else if (player.physicsBody?.velocity.dx)! < 0 && touchingGround {
+//            player?.physicsBody?.applyForce(CGVector(dx: CGFloat(runAcceleration) * (player.physicsBody?.mass ?? 1), dy: 0))
+//        }
+        else if abs((player.physicsBody?.velocity.dx)!) > 0 && !touchingGround {
+            player?.physicsBody?.applyForce(CGVector(dx: CGFloat(-1 * runAcceleration) * (player.physicsBody?.velocity.dx ?? 0)/CGFloat(runMaxSpeed * 30) * (player.physicsBody?.mass ?? 1), dy: 0))
         }
-        else if ((player.physicsBody?.velocity.dx)! < -5 && touchingGround) {
-            player?.physicsBody?.applyForce(CGVector(dx: CGFloat(runAcceleration) * (player.physicsBody?.mass ?? 1), dy: 0))
+        else if (touchingGround) {
+            player.physicsBody?.velocity.dx = 0
         }
+        
+//        if (abs((player.physicsBody?.velocity.dx)!) < 100.0) {
+//            player.physicsBody?.velocity.dx = 0
+//        }
+//        else if (player.physicsBody?.velocity.dx)! < -5 && !touchingGround {
+//            player?.physicsBody?.applyForce(CGVector(dx: CGFloat(runAcceleration) * (player.physicsBody?.velocity.dx ?? 0)/CGFloat(runMaxSpeed) * (player.physicsBody?.mass ?? 1), dy: 0))
+//        }
+        
+//        if (player.physicsBody?.velocity.dx)! > 5 && !touchingGround {
+//            player?.physicsBody?.applyForce(CGVector(dx: CGFloat(-1 * runAcceleration/2) * (player.physicsBody?.mass ?? 1), dy: 0))
+//        }
+//        if (player.physicsBody?.velocity.dx)! < -5 && !touchingGround {
+//            player?.physicsBody?.applyForce(CGVector(dx: CGFloat(runAcceleration/2) * (player.physicsBody?.mass ?? 1), dy: 0))
+//        }
 
         if !inspectMode && (!inAnimation || jumpableWallAnimation) && player.position.y > -1000 {
             if abs(player.position.x - cam.position.x) >= CGFloat(camInitiateFollowX) {
@@ -1361,10 +1385,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
             for center in centers {
-                print(center.position)
+                //print(center.position)
             }
             if abs(player.position.y - cam.position.y) >= CGFloat(camInitiateFollowY) {
-                print("test12")
+                //print("test12")
                 for star in stars {
                     star.body.physicsBody?.velocity.dy = -star.speedMultiplier * (player.physicsBody?.velocity.dy)!
                 }
@@ -1526,7 +1550,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let enemy2 = enemy2s[i]
             if abs(Double(levels[level].enemy2Positions[i][0]) - enemy2.position.x) > Double(levels[level].enemy2Bounds[i]) {
                 let currentDirection = -abs(Double(levels[level].enemy2Positions[i][0]) - enemy2.position.x)/(Double(levels[level].enemy2Positions[i][0]) - enemy2.position.x)
-                print(Double(levels[level].enemy2Positions[i][0]) - enemy2.position.x)
+                //print(Double(levels[level].enemy2Positions[i][0]) - enemy2.position.x)
                 enemy2.position.x += 5 * -currentDirection
                 enemy2.physicsBody?.velocity.dx *= -1
             }
@@ -1556,8 +1580,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         for center in centers {
-            print(originalLocationCenters[0])
-            print(center.position)
+            //print(originalLocationCenters[0])
+            //print(center.position)
         }
         
         for star in stars {
