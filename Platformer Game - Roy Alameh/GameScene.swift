@@ -9,6 +9,203 @@ import SpriteKit
 import GameplayKit
 import UIKit
 
+class LevelTracker {
+    static var level = 0
+}
+
+class Level {
+    let groundSizes       : [[Int]]
+    let wallSizes         : [[Int]]
+    let jumpableWallSizes : [[Int]]
+    let coinPositions   : [[Int]]
+    let enemy1Positions : [[Int]]
+    let enemy2Positions : [[Int]]
+    let enemy3Positions : [[Int]]
+    let enemy2Bounds    : [Int]
+    let groundPositions       : [[Int]]
+    let wallPositions         : [[Int]]
+    let jumpableWallPositions : [[Int]]
+    let levelEndPosition : [Int]
+    
+    init(level : Int) {
+        if level == 0 {
+            groundSizes         = [[2000, 100],
+                                       [20, 50],
+                                       [750, 50],
+                                       [60, 20],
+                                       [1000, 20]]
+            
+            wallSizes           = [[20, 300],
+                                       [20, 300],
+                                       [50, 48],
+                                       [50, 200],
+                                       [50, 150]]
+            
+            jumpableWallSizes   = [[20, 1000],
+                                       [20, 1000],
+                                       [20, 1000],
+                                       [50, 1000],
+                                       [50, 800]]
+            
+            coinPositions   =               [[200, 200],
+                                             [500, 300],
+                                             [600, 400],
+                                             [1000, 600],
+                                             [1100, 700]]
+            
+            enemy1Positions =               [[750, 310],
+                                             [2250, 310],
+                                             [2400, 310],
+                                             [2550, 310],
+                                             [2750, 310],
+                                             [2850, 310]]
+            
+            enemy2Positions =               [[3780, 1680]]
+            
+            enemy3Positions =               [[1400, 200]]
+
+            enemy2Bounds    =               [200]
+            
+            groundPositions =                     [[1000, 50],
+                                                   [1500, 600],
+                                                   [2525, 300],
+                                                   [2925, 1485],
+                                                   [3870, 1485]]
+            
+            wallPositions =                       [[500, 100],
+                                                   [1000, 100],
+                                                   [2125, 300],
+                                                   [2175, 375],
+                                                   [2925, 350]]
+            
+            jumpableWallPositions =               [[1500, 100],
+                                                   [1100, 950],
+                                                   [1900, 950],
+                                                   [3400, 975],
+                                                   [2925, 1075]]
+            
+            levelEndPosition =                     [4200, 1550]
+        }
+        else if level == 0 {
+            groundSizes         = [[2000, 100],
+                                       [20, 50],
+                                       [750, 50],
+                                       [60, 20],
+                                       [1000, 20]]
+            
+            wallSizes           = [[20, 300],
+                                       [20, 300],
+                                       [50, 48],
+                                       [50, 200],
+                                       [50, 150]]
+            
+            jumpableWallSizes   = [[20, 1000],
+                                       [20, 1000],
+                                       [20, 1000],
+                                       [50, 1000],
+                                       [50, 800]]
+            
+            coinPositions   =               [[200, 200],
+                                             [500, 300],
+                                             [600, 400],
+                                             [1000, 600],
+                                             [1100, 700]]
+            
+            enemy1Positions =               [[750, 310],
+                                             [2250, 310],
+                                             [2400, 310],
+                                             [2550, 310],
+                                             [2750, 310],
+                                             [2850, 310]]
+            
+            enemy2Positions =               [[3780, 1680]]
+            
+            enemy3Positions =               [[1400, 200]]
+
+            enemy2Bounds    =               [200]
+            
+            groundPositions =                     [[1000, 50],
+                                                   [1500, 600],
+                                                   [2525, 300],
+                                                   [2925, 1485],
+                                                   [3870, 1485]]
+            
+            wallPositions =                       [[500, 100],
+                                                   [1000, 100],
+                                                   [2125, 300],
+                                                   [2175, 375],
+                                                   [2925, 350]]
+            
+            jumpableWallPositions =               [[1500, 100],
+                                                   [1100, 950],
+                                                   [1900, 950],
+                                                   [3400, 975],
+                                                   [2925, 1075]]
+            
+            levelEndPosition =                     [4200, 1550]
+        }
+        else {
+            groundSizes         = [[2000, 100],
+                                       [20, 50],
+                                       [750, 50],
+                                       [60, 20],
+                                       [1000, 20]]
+            
+            wallSizes           = [[20, 300],
+                                       [20, 300],
+                                       [50, 48],
+                                       [50, 200],
+                                       [50, 150]]
+            
+            jumpableWallSizes   = [[20, 1000],
+                                       [20, 1000],
+                                       [20, 1000],
+                                       [50, 1000],
+                                       [50, 800]]
+            
+            coinPositions   =               [[200, 200],
+                                             [500, 300],
+                                             [600, 400],
+                                             [1000, 600],
+                                             [1100, 700]]
+            
+            enemy1Positions =               [[750, 310],
+                                             [2250, 310],
+                                             [2400, 310],
+                                             [2550, 310],
+                                             [2750, 310],
+                                             [2850, 310]]
+            
+            enemy2Positions =               [[3780, 1680]]
+            
+            enemy3Positions =               [[1400, 200]]
+
+            enemy2Bounds    =               [200]
+            
+            groundPositions =                     [[1000, 50],
+                                                   [1500, 600],
+                                                   [2525, 300],
+                                                   [2925, 1485],
+                                                   [3870, 1485]]
+            
+            wallPositions =                       [[500, 100],
+                                                   [1000, 100],
+                                                   [2125, 300],
+                                                   [2175, 375],
+                                                   [2925, 350]]
+            
+            jumpableWallPositions =               [[1500, 100],
+                                                   [1100, 950],
+                                                   [1900, 950],
+                                                   [3400, 975],
+                                                   [2925, 1075]]
+            
+            levelEndPosition =                     [4200, 1550]
+        }
+        
+    }
+}
+
 struct Star {
     var distance           : CGFloat
     var speedMultiplier    : CGFloat
@@ -93,61 +290,61 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let enemy1Size          = [30, 50]
     let enemy2Size          = [40, 70]
     let enemy3Size          = [50, 100]
-    let groundSizes         = [[2000, 100],
-                               [20, 50],
-                               [750, 50],
-                               [60, 20],
-                               [1000, 20]]
-    
-    let wallSizes           = [[20, 300],
-                               [20, 300],
-                               [50, 48],
-                               [50, 200],
-                               [50, 150]]
-    
-    let jumpableWallSizes   = [[20, 1000],
-                               [20, 1000],
-                               [20, 1000],
-                               [50, 1000],
-                               [50, 800]]
-    
-    let coinPositions   : [[Int]] = [[200, 200],
-                                     [500, 300],
-                                     [600, 400],
-                                     [1000, 600],
-                                     [1100, 700]]
-    
-    let enemy1Positions : [[Int]] = [[750, 310],
-                                     [2250, 310],
-                                     [2400, 310],
-                                     [2550, 310],
-                                     [2750, 310],
-                                     [2850, 310]]
-    let enemy2Positions : [[Int]] = [[3780, 1680]]
-    let enemy3Positions : [[Int]] = [[1400, 200]]
+//    let groundSizes         = [[2000, 100],
+//                               [20, 50],
+//                               [750, 50],
+//                               [60, 20],
+//                               [1000, 20]]
+//
+//    let wallSizes           = [[20, 300],
+//                               [20, 300],
+//                               [50, 48],
+//                               [50, 200],
+//                               [50, 150]]
+//
+//    let jumpableWallSizes   = [[20, 1000],
+//                               [20, 1000],
+//                               [20, 1000],
+//                               [50, 1000],
+//                               [50, 800]]
+//
+//    let coinPositions   : [[Int]] = [[200, 200],
+//                                     [500, 300],
+//                                     [600, 400],
+//                                     [1000, 600],
+//                                     [1100, 700]]
+//
+//    let enemy1Positions : [[Int]] = [[750, 310],
+//                                     [2250, 310],
+//                                     [2400, 310],
+//                                     [2550, 310],
+//                                     [2750, 310],
+//                                     [2850, 310]]
+//    let enemy2Positions : [[Int]] = [[3780, 1680]]
+//    let enemy3Positions : [[Int]] = [[1400, 200]]
     var enemy3Directions: [Bool] = []
-    
-    let enemy2Bounds    : [Int] = [200]
-    
-    let groundPositions       : [[Int]] = [[1000, 50],
-                                           [1500, 600],
-                                           [2525, 300],
-                                           [2925, 1485],
-                                           [3870, 1485]]
-    
-    let wallPositions         : [[Int]] = [[500, 100],
-                                           [1000, 100],
-                                           [2125, 300],
-                                           [2175, 375],
-                                           [2925, 350]]
-    
-    let jumpableWallPositions : [[Int]] = [[1500, 100],
-                                           [1100, 950],
-                                           [1900, 950],
-                                           [3400, 975],
-                                           [2925, 1075]]
-    
-    let levelEndPosition = [4200, 1550]
+//
+//    let enemy2Bounds    : [Int] = [200]
+//
+//    let groundPositions       : [[Int]] = [[1000, 50],
+//                                           [1500, 600],
+//                                           [2525, 300],
+//                                           [2925, 1485],
+//                                           [3870, 1485]]
+//
+//    let wallPositions         : [[Int]] = [[500, 100],
+//                                           [1000, 100],
+//                                           [2125, 300],
+//                                           [2175, 375],
+//                                           [2925, 350]]
+//
+//    let jumpableWallPositions : [[Int]] = [[1500, 100],
+//                                           [1100, 950],
+//                                           [1900, 950],
+//                                           [3400, 975],
+//                                           [2925, 1075]]
+//
+//    let levelEndPosition = [4200, 1550]
     
     var coins           = [SKShapeNode]()
     var enemy1s         = [SKShapeNode]()
@@ -259,7 +456,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var originalLocationStars = [CGPoint]()
     var originalLocationBlackHoleCenters = [CGPoint]()
     var originalLocationCenters = [CGPoint]()
+    
+    let levels = [Level(level: 0), Level(level: 1), Level(level: 2)]
+    var level = 0
     override func sceneDidLoad() {
+        
+        level = LevelTracker.level
+        
         self.view?.preferredFramesPerSecond = 60
         
         self.physicsWorld.contactDelegate = self
@@ -291,8 +494,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         levelEnd.physicsBody?.collisionBitMask   = 0
         levelEnd.physicsBody?.contactTestBitMask = playerCategory
         
-        levelEnd.position.x = CGFloat(levelEndPosition[0])
-        levelEnd.position.y = CGFloat(levelEndPosition[1])
+        levelEnd.position.x = CGFloat(levels[level].levelEndPosition[0])
+        levelEnd.position.y = CGFloat(levels[level].levelEndPosition[1])
         
         levelEnd.fillColor = UIColor.black
         
@@ -562,7 +765,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        centerOfMass4.physicsBody?.allowsRotation = false
         //centerOfMass.zRotation = 1
         
-        for i in 0..<coinPositions.count {
+        for i in 0..<levels[level].coinPositions.count {
             let coin = SKShapeNode(circleOfRadius: CGFloat(coinRadius))
             coin.physicsBody = SKPhysicsBody(circleOfRadius: CGFloat(coinRadius))
             
@@ -575,8 +778,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             coin.physicsBody?.collisionBitMask   = 0
             coin.physicsBody?.contactTestBitMask = playerCategory
             
-            coin.position.x = CGFloat(Double(coinPositions[i][0]))
-            coin.position.y = CGFloat(Double(coinPositions[i][1]))
+            coin.position.x = CGFloat(Double(levels[level].coinPositions[i][0]))
+            coin.position.y = CGFloat(Double(levels[level].coinPositions[i][1]))
             
             coin.fillColor = UIColor.black
             
@@ -584,9 +787,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.addChild(coin)
         }
         
-        for i in 0..<groundPositions.count {
-            let ground = SKShapeNode(rectOf: CGSize(width: CGFloat(groundSizes[i][0]), height: CGFloat(groundSizes[i][1])))
-            ground.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: CGFloat(groundSizes[i][0]), height: CGFloat(groundSizes[i][1])))
+        for i in 0..<levels[level].groundPositions.count {
+            let ground = SKShapeNode(rectOf: CGSize(width: CGFloat(levels[level].groundSizes[i][0]), height: CGFloat(levels[level].groundSizes[i][1])))
+            ground.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: CGFloat(levels[level].groundSizes[i][0]), height: CGFloat(levels[level].groundSizes[i][1])))
             
             ground.physicsBody?.affectedByGravity  = false
             ground.physicsBody?.isDynamic          = false
@@ -599,8 +802,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ground.physicsBody?.collisionBitMask   = playerCategory
             ground.physicsBody?.contactTestBitMask = playerCategory
             
-            ground.position.x = CGFloat(Double(groundPositions[i][0]))
-            ground.position.y = CGFloat(Double(groundPositions[i][1]))
+            ground.position.x = CGFloat(Double(levels[level].groundPositions[i][0]))
+            ground.position.y = CGFloat(Double(levels[level].groundPositions[i][1]))
             
             ground.fillColor = UIColor.black
             
@@ -608,7 +811,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.addChild(ground)
         }
         
-        for i in 0..<enemy1Positions.count {
+        for i in 0..<levels[level].enemy1Positions.count {
             let enemy1 = SKShapeNode(rectOf: CGSize(width: CGFloat(enemy1Size[0]), height: CGFloat(enemy1Size[1])))
             enemy1.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: CGFloat(enemy1Size[0]), height: CGFloat(enemy1Size[1])))
             
@@ -625,8 +828,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             enemy1.physicsBody?.collisionBitMask   = groundCategory
             enemy1.physicsBody?.contactTestBitMask = playerCategory | wallCategory | jumpableWallCategory
             
-            enemy1.position.x = CGFloat(Double(enemy1Positions[i][0]))
-            enemy1.position.y = CGFloat(Double(enemy1Positions[i][1]))
+            enemy1.position.x = CGFloat(Double(levels[level].enemy1Positions[i][0]))
+            enemy1.position.y = CGFloat(Double(levels[level].enemy1Positions[i][1]))
             
             enemy1.fillColor = UIColor.black
             
@@ -636,7 +839,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             enemy1.physicsBody?.velocity.dx = CGFloat(enemy1Speed)
         }
         
-        for i in 0..<enemy2Positions.count {
+        for i in 0..<levels[level].enemy2Positions.count {
             let enemy2 = SKShapeNode(rectOf: CGSize(width: CGFloat(enemy2Size[0]), height: CGFloat(enemy2Size[1])))
             enemy2.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: CGFloat(enemy2Size[0]), height: CGFloat(enemy2Size[1])))
             
@@ -653,8 +856,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             enemy2.physicsBody?.collisionBitMask   = groundCategory
             enemy2.physicsBody?.contactTestBitMask = playerCategory | groundCategory
             
-            enemy2.position.x = CGFloat(Double(enemy2Positions[i][0]))
-            enemy2.position.y = CGFloat(Double(enemy2Positions[i][1]))
+            enemy2.position.x = CGFloat(Double(levels[level].enemy2Positions[i][0]))
+            enemy2.position.y = CGFloat(Double(levels[level].enemy2Positions[i][1]))
             
             enemy2s.append(enemy2)
             self.addChild(enemy2)
@@ -664,7 +867,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             enemy2.physicsBody?.velocity.dx = CGFloat(enemy2Speed)
         }
         
-        for i in 0..<enemy3Positions.count {
+        for i in 0..<levels[level].enemy3Positions.count {
             let enemy3 = SKShapeNode(rectOf: CGSize(width: CGFloat(enemy3Size[0]), height: CGFloat(enemy3Size[1])))
             enemy3.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: CGFloat(enemy3Size[0]), height: CGFloat(enemy3Size[1])))
             
@@ -681,8 +884,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             enemy3.physicsBody?.collisionBitMask   = groundCategory | wallCategory | jumpableWallCategory
             enemy3.physicsBody?.contactTestBitMask = playerCategory | wallCategory | jumpableWallCategory
             
-            enemy3.position.x = CGFloat(Double(enemy3Positions[i][0]))
-            enemy3.position.y = CGFloat(Double(enemy3Positions[i][1]))
+            enemy3.position.x = CGFloat(Double(levels[level].enemy3Positions[i][0]))
+            enemy3.position.y = CGFloat(Double(levels[level].enemy3Positions[i][1]))
             
             enemy3.fillColor = UIColor.black
             
@@ -692,9 +895,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             enemy3Clock(i: i)
         }
         
-        for i in 0..<wallPositions.count {
-            let wall = SKShapeNode(rectOf: CGSize(width: CGFloat(wallSizes[i][0]), height: CGFloat(wallSizes[i][1])))
-            wall.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: CGFloat(wallSizes[i][0]), height: CGFloat(wallSizes[i][1])))
+        for i in 0..<levels[level].wallPositions.count {
+            let wall = SKShapeNode(rectOf: CGSize(width: CGFloat(levels[level].wallSizes[i][0]), height: CGFloat(levels[level].wallSizes[i][1])))
+            wall.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: CGFloat(levels[level].wallSizes[i][0]), height: CGFloat(levels[level].wallSizes[i][1])))
             
             wall.physicsBody?.affectedByGravity  = false
             wall.physicsBody?.isDynamic          = false
@@ -707,8 +910,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             wall.physicsBody?.collisionBitMask   = playerCategory
             wall.physicsBody?.contactTestBitMask = playerCategory | enemy1Category
             
-            wall.position.x = CGFloat(Double(wallPositions[i][0]))
-            wall.position.y = CGFloat(Double(wallPositions[i][1]))
+            wall.position.x = CGFloat(Double(levels[level].wallPositions[i][0]))
+            wall.position.y = CGFloat(Double(levels[level].wallPositions[i][1]))
             
             wall.fillColor = UIColor.black
             
@@ -716,9 +919,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             self.addChild(wall)
         }
         
-        for i in 0..<jumpableWallPositions.count {
-            let jumpableWall = SKShapeNode(rectOf: CGSize(width: CGFloat(jumpableWallSizes[i][0]), height: CGFloat(jumpableWallSizes[i][1])))
-            jumpableWall.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: CGFloat(jumpableWallSizes[i][0]), height: CGFloat(jumpableWallSizes[i][1])))
+        for i in 0..<levels[level].jumpableWallPositions.count {
+            let jumpableWall = SKShapeNode(rectOf: CGSize(width: CGFloat(levels[level].jumpableWallSizes[i][0]), height: CGFloat(levels[level].jumpableWallSizes[i][1])))
+            jumpableWall.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: CGFloat(levels[level].jumpableWallSizes[i][0]), height: CGFloat(levels[level].jumpableWallSizes[i][1])))
             
             jumpableWall.physicsBody?.affectedByGravity  = false
             jumpableWall.physicsBody?.isDynamic          = false
@@ -731,8 +934,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             jumpableWall.physicsBody?.collisionBitMask   = playerCategory
             jumpableWall.physicsBody?.contactTestBitMask = playerCategory | enemy1Category
             
-            jumpableWall.position.x = CGFloat(Double(jumpableWallPositions[i][0]))
-            jumpableWall.position.y = CGFloat(Double(jumpableWallPositions[i][1]))
+            jumpableWall.position.x = CGFloat(Double(levels[level].jumpableWallPositions[i][0]))
+            jumpableWall.position.y = CGFloat(Double(levels[level].jumpableWallPositions[i][1]))
             
             jumpableWall.fillColor = UIColor.black
             
@@ -1292,9 +1495,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         for i in 0..<enemy2s.count {
             let enemy2 = enemy2s[i]
-            if abs(Double(enemy2Positions[i][0]) - enemy2.position.x) > Double(enemy2Bounds[i]) {
-                let currentDirection = -abs(Double(enemy2Positions[i][0]) - enemy2.position.x)/(Double(enemy2Positions[i][0]) - enemy2.position.x)
-                print(Double(enemy2Positions[i][0]) - enemy2.position.x)
+            if abs(Double(levels[level].enemy2Positions[i][0]) - enemy2.position.x) > Double(levels[level].enemy2Bounds[i]) {
+                let currentDirection = -abs(Double(levels[level].enemy2Positions[i][0]) - enemy2.position.x)/(Double(levels[level].enemy2Positions[i][0]) - enemy2.position.x)
+                print(Double(levels[level].enemy2Positions[i][0]) - enemy2.position.x)
                 enemy2.position.x += 5 * -currentDirection
                 enemy2.physicsBody?.velocity.dx *= -1
             }
@@ -1652,6 +1855,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         if won {
             gameScene.label.text = "You Win!"
+            LevelTracker.level += 1
         }
         else {
             gameScene.label.text = "You Lost"
