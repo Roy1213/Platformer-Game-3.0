@@ -14,18 +14,27 @@ class LevelTracker {
 }
 
 class Level {
-    let groundSizes       : [[Int]]
-    let wallSizes         : [[Int]]
-    let jumpableWallSizes : [[Int]]
-    let coinPositions   : [[Int]]
-    let enemy1Positions : [[Int]]
-    let enemy2Positions : [[Int]]
-    let enemy3Positions : [[Int]]
-    let enemy2Bounds    : [Int]
-    let groundPositions       : [[Int]]
-    let wallPositions         : [[Int]]
-    let jumpableWallPositions : [[Int]]
-    let levelEndPosition : [Int]
+    let groundSizes              : [[Int]]
+    let wallSizes                : [[Int]]
+    let jumpableWallSizes        : [[Int]]
+    let coinPositions            : [[Int]]
+    let enemy1Positions          : [[Int]]
+    let enemy2Positions          : [[Int]]
+    let enemy3Positions          : [[Int]]
+    let enemy2Bounds             : [Int]
+    let groundPositions          : [[Int]]
+    let wallPositions            : [[Int]]
+    let jumpableWallPositions    : [[Int]]
+    let levelEndPosition         : [Int]
+    var blackHoleCenters         : [CGPoint]
+    var blackHoleAs              : [CGFloat]
+    var blackHoleBs              : [CGFloat]
+    var numsOfAccretionDiskStars : [Int]
+    var angularVelocities        : [CGFloat]
+    var centerLocations          : [CGPoint]
+    var centerSizes              : [CGFloat]
+    var centerColors             : [UIColor]
+    var centerZDistance          : CGFloat
     
     init(level : Int) {
         if level == 0 {
@@ -85,8 +94,18 @@ class Level {
                                                    [2925, 1075]]
             
             levelEndPosition =                     [4200, 1550]
+            
+            blackHoleCenters         = [CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600)]
+            blackHoleAs              = [CGFloat(150), CGFloat(100), CGFloat(80)]
+            blackHoleBs              = [CGFloat(30), CGFloat(20), CGFloat(16)]
+            numsOfAccretionDiskStars = [40, 40, 40, 40, 40]
+            angularVelocities        = [CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0)]
+            centerLocations          = [CGPoint(x: 300, y: 600)]
+            centerSizes              = [CGFloat(70)]
+            centerColors             = [UIColor.darkGray]
+            centerZDistance          = CGFloat(2500.0)
         }
-        else if level == 0 {
+        else if level == 1 {
             groundSizes         = [[2000, 100],
                                        [20, 50],
                                        [750, 50],
@@ -143,6 +162,16 @@ class Level {
                                                    [2925, 1075]]
             
             levelEndPosition =                     [4200, 1550]
+            
+            blackHoleCenters         = [CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600)]
+            blackHoleAs              = [CGFloat(150), CGFloat(100), CGFloat(80)]
+            blackHoleBs              = [CGFloat(30), CGFloat(20), CGFloat(16)]
+            numsOfAccretionDiskStars = [40, 40, 40, 40, 40]
+            angularVelocities        = [CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0)]
+            centerLocations          = [CGPoint(x: 300, y: 600)]
+            centerSizes              = [CGFloat(70)]
+            centerColors             = [UIColor.darkGray]
+            centerZDistance          = CGFloat(2500.0)
         }
         else {
             groundSizes         = [[2000, 100],
@@ -201,8 +230,17 @@ class Level {
                                                    [2925, 1075]]
             
             levelEndPosition =                     [4200, 1550]
+            
+            blackHoleCenters         = [CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600)]
+            blackHoleAs              = [CGFloat(150), CGFloat(100), CGFloat(80)]
+            blackHoleBs              = [CGFloat(30), CGFloat(20), CGFloat(16)]
+            numsOfAccretionDiskStars = [40, 40, 40, 40, 40]
+            angularVelocities        = [CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0)]
+            centerLocations          = [CGPoint(x: 300, y: 600)]
+            centerSizes              = [CGFloat(70)]
+            centerColors             = [UIColor.darkGray]
+            centerZDistance          = CGFloat(2500.0)
         }
-        
     }
 }
 
@@ -244,6 +282,9 @@ class AccretionDisk {
     }
 }
 
+class WinTracker {
+    static var won = false
+}
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var entities = [GKEntity]()
@@ -441,18 +482,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var numOfStars = 2000
     
     var accretionDisks = [AccretionDisk]()
-    
-    var blackHoleCenters = [CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600)]
-    var blackHoleAs = [CGFloat(150), CGFloat(100), CGFloat(80)]
-    var blackHoleBs = [CGFloat(30), CGFloat(20), CGFloat(16)]
-    var numsOfAccretionDiskStars = [40, 40, 40, 40, 40]
-    var angularVelocities = [CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0)]
-    var centerLocations = [CGPoint(x: 300, y: 600)]
-    var centerSizes = [CGFloat(70)]
-    var centerColors = [UIColor.darkGray]
     var centers = [SKShapeNode]()
-    var centerZDistance = CGFloat(2500.0)
-    
     var originalLocationStars = [CGPoint]()
     var originalLocationBlackHoleCenters = [CGPoint]()
     var originalLocationCenters = [CGPoint]()
@@ -460,7 +490,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let levels = [Level(level: 0), Level(level: 1), Level(level: 2)]
     var level = 0
     override func sceneDidLoad() {
-        
         level = LevelTracker.level
         
         self.view?.preferredFramesPerSecond = 60
@@ -944,10 +973,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         while numOfStars > 0 {
-            let x = Double.random(in: -2000...3000)
-            let y = Double.random(in: -2000...5000)
-            let z = Double.random(in: 0...2000)
-            let body = SKShapeNode(circleOfRadius: z/Double(300))
+            let x = Double.random(in: -400...10000)
+            let y = Double.random(in: -400...10000)
+            let z = Double.random(in: 2000...10000)
+            let body = SKShapeNode(circleOfRadius: Double(15000)/z)
             body.physicsBody = SKPhysicsBody()
             body.physicsBody?.affectedByGravity = false
             body.physicsBody?.categoryBitMask = 0
@@ -957,7 +986,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             body.zPosition = -4
             body.name = "star"
             body.isHidden = true
-            stars.append(Star(distance: z, speedMultiplier: (z + 2000)/10000, body: body))
+            stars.append(Star(distance: z, speedMultiplier: 1500/(z + 2000), body: body))
             originalLocationStars.append(body.position)
             self.addChild(body)
             numOfStars -= 1
@@ -968,17 +997,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        centerPoint.position = blackHoleCenter
 //        self.addChild(centerPoint)
         
-        for i in 0..<blackHoleCenters.count {
-            var disk = AccretionDisk(starsAccretionDisk: [Star2](), blackHoleCenter: blackHoleCenters[i], blackHoleA: blackHoleAs[i], blackHoleB: blackHoleBs[i],  numOfAccretionDiskStars: numsOfAccretionDiskStars[i], angularVelocity: angularVelocities[i])
+        for i in 0..<levels[level].blackHoleCenters.count {
+            var disk = AccretionDisk(starsAccretionDisk: [Star2](), blackHoleCenter: levels[level].blackHoleCenters[i], blackHoleA: levels[level].blackHoleAs[i], blackHoleB: levels[level].blackHoleBs[i],  numOfAccretionDiskStars: levels[level].numsOfAccretionDiskStars[i], angularVelocity: levels[level].angularVelocities[i])
             accretionDisks.append(disk)
             originalLocationBlackHoleCenters.append(disk.blackHoleCenter)
         }
         
-        for i in 0..<centerLocations.count {
-            var center = SKShapeNode(circleOfRadius: centerSizes[i])
-            center.position = centerLocations[i]
+        for i in 0..<levels[level].centerLocations.count {
+            var center = SKShapeNode(circleOfRadius: levels[level].centerSizes[i])
+            center.position = levels[level].centerLocations[i]
             print(center.position)
-            center.fillColor = centerColors[i]
+            center.fillColor = levels[level].centerColors[i]
             center.zPosition = -2
             centers.append(center)
             self.addChild(center)
@@ -1294,10 +1323,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     star.body.physicsBody?.velocity.dx = -star.speedMultiplier * (player.physicsBody?.velocity.dx)!
                 }
                 for accretionDisk in accretionDisks {
-                    accretionDisk.blackHoleCenter.x -= centerZDistance/10000.0 * (player.physicsBody?.velocity.dx)! * (1.0/60.0)
+                    accretionDisk.blackHoleCenter.x -= levels[level].centerZDistance/10000.0 * (player.physicsBody?.velocity.dx)! * (1.0/60.0)
                 }
                 for center in centers {
-                    center.position.x -= centerZDistance/10000.0 * (player.physicsBody?.velocity.dx)! * (1.0/60.0)
+                    center.position.x -= levels[level].centerZDistance/10000.0 * (player.physicsBody?.velocity.dx)! * (1.0/60.0)
                 }
                 if player.position.x > cam.position.x {
                     let change = player.position.x - cam.position.x - CGFloat(camInitiateFollowX)
@@ -1340,10 +1369,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     star.body.physicsBody?.velocity.dy = -star.speedMultiplier * (player.physicsBody?.velocity.dy)!
                 }
                 for accretionDisk in accretionDisks {
-                    accretionDisk.blackHoleCenter.y -= centerZDistance/10000.0 * (player.physicsBody?.velocity.dy)! * (1.0/60.0)
+                    accretionDisk.blackHoleCenter.y -= levels[level].centerZDistance/10000.0 * (player.physicsBody?.velocity.dy)! * (1.0/60.0)
                 }
                 for center in centers {
-                    center.position.y -= centerZDistance/10000.0 * (player.physicsBody?.velocity.dy)! * (1.0/60.0)
+                    center.position.y -= levels[level].centerZDistance/10000.0 * (player.physicsBody?.velocity.dy)! * (1.0/60.0)
                 }
                 if player.position.y > cam.position.y {
                     let change = player.position.y - cam.position.y - CGFloat(camInitiateFollowY)
@@ -1839,6 +1868,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func end(won: Bool) {
+        WinTracker.won = won
+        if won {
+            LevelTracker.level += 1
+        }
         var gameScene : EndScene!
         if let scene = GKScene(fileNamed: "EndScene") {
             gameScene = scene.rootNode as? EndScene
@@ -1852,13 +1885,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 view.showsFPS = false
                 view.showsNodeCount = false
             }
-        }
-        if won {
-            gameScene.label.text = "You Win!"
-            LevelTracker.level += 1
-        }
-        else {
-            gameScene.label.text = "You Lost"
         }
     }
     

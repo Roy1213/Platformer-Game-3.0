@@ -30,7 +30,20 @@ class EndScene : SKScene {
         playAgainLabel.fontSize = 30
         playAgainLabel.position.x = label.position.x
         playAgainLabel.position.y = label.position.y - 150
-        playAgainLabel.text = "Play Again?"
+        
+        if !WinTracker.won {
+            label.text = "Level Failed"
+            playAgainLabel.text = "Replay Level \(LevelTracker.level + 1)?"
+        }
+        else if (LevelTracker.level == 3) {
+            label.text = "You win!"
+            playAgainLabel.text = "Play Again?"
+            LevelTracker.level = 0
+        }
+        else {
+            label.text = "Level Passed!"
+            playAgainLabel.text = "Play Level \(LevelTracker.level + 1)"
+        }
         playAgainLabel.name = "playAgainLabel"
         
         cam = SKCameraNode()
