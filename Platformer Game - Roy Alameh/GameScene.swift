@@ -36,6 +36,7 @@ class Level {
     var centerColors             : [UIColor]
     var starColors               : [UIColor]
     var centerZDistance          : CGFloat
+    var enemy3WaitTimes          : [CGFloat]
     
     init(level : Int) {
         if level == 0 {
@@ -73,6 +74,8 @@ class Level {
             enemy2Positions =               [[3780, 1680]]
             
             enemy3Positions =               [[1400, 200]]
+            
+            enemy3WaitTimes =               [1.1]
 
             enemy2Bounds    =               [200]
             
@@ -128,11 +131,18 @@ class Level {
             
             enemy1Positions =               [[-2000, 0]]
             
-            enemy2Positions =               [[-3000, 0]]
+            enemy2Positions =               [[1200, 1650],
+                                             [1250, 1670],
+                                             [1300, 1690],
+                                             [1350, 1710],
+                                             [1400, 1730],
+                                             [1450, 1750],
+                                             [1500, 1770]]
             
             enemy3Positions =               [[-4000, 0]]
+            enemy3WaitTimes =               [1.1]
 
-            enemy2Bounds    =               [-5000, -4001]
+            enemy2Bounds    =               [300, 300, 300, 300, 300, 300, 300]
             
             groundPositions =                     [[100, 0],
                                                    [500, 100],
@@ -155,8 +165,8 @@ class Level {
             blackHoleCenters         = [CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600)]
             blackHoleAs              = [CGFloat(300), CGFloat(200), CGFloat(160)]
             blackHoleBs              = [CGFloat(60), CGFloat(40), CGFloat(32)]
-            numsOfAccretionDiskStars = [40, 40, 40]
-            angularVelocities        = [CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0)]
+            numsOfAccretionDiskStars = [60, 60, 60]
+            angularVelocities        = [CGFloat(1.5), CGFloat(1.5), CGFloat(1.5), CGFloat(1.5), CGFloat(1.5)]
             centerLocations          = [CGPoint(x: 300, y: 600)]
             centerSizes              = [CGFloat(70)]
             centerColors             = [UIColor.red]
@@ -164,40 +174,69 @@ class Level {
             centerZDistance          = CGFloat(3500.0)
         }
         else {
-            groundSizes         = [[200, 20]]
+            groundSizes         = [[3000, 20]]
             
-            wallSizes           = [[20, 200]]
+            wallSizes           = [[20, 200], [20, 200]]
             
             jumpableWallSizes   = [[0, 0]]
             
             coinPositions   =               [[0, 0]]
             
-            enemy1Positions =               [[0, 0]]
+            enemy1Positions =               [[300, 100],
+                                             [400, 100],
+                                             [500, 100],
+                                             [600, 100],
+                                             [700, 100],
+                                             [800, 100],
+                                             [900, 100],
+                                             [1000, 100],
+                                             [1100, 100],
+                                             [1200, 100],
+                                             [1300, 100],
+                                             [1400, 100],
+                                             [1500, 100],
+                                             [1600, 100],
+                                             [1700, 100],
+                                             [1800, 100],
+                                             [1900, 100],
+                                             [2000, 100],
+                                             [2100, 100],
+                                             [2200, 100],
+                                             [2300, 100],
+                                             [2400, 100],
+                                             [2500, 100],
+                                             [2600, 100],
+                                             [2700, 100],
+                                             [2800, 100],
+                                             [2900, 100]]
             
-            enemy2Positions =               [[0, 0]]
+            enemy2Positions =               [[1300, 100],
+                                             [1700, 100]]
             
-            enemy3Positions =               [[0, 0]]
+            enemy3Positions =               [[700, 200], [1300, 200]]
+            
+            enemy3WaitTimes =               [3.25, 3.5]
 
-            enemy2Bounds    =               [0, 0]
+            enemy2Bounds    =               [1000, 1000]
             
-            groundPositions =                     [[0, 0]]
+            groundPositions =                     [[1500, 0]]
             
-            wallPositions =                       [[0, 0]]
+            wallPositions =                       [[190, 90], [2990, 90]]
             
             jumpableWallPositions =               [[-6000, 0]]
             
-            levelEndPosition =                     [1000, 0]
+            levelEndPosition =                     [3300, 100]
             
             blackHoleCenters         = [CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600), CGPoint(x: 300, y: 600)]
-            blackHoleAs              = [CGFloat(150), CGFloat(100), CGFloat(80)]
-            blackHoleBs              = [CGFloat(30), CGFloat(20), CGFloat(16)]
-            numsOfAccretionDiskStars = [40, 40, 40, 40, 40]
-            angularVelocities        = [CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0), CGFloat(2.0)]
+            blackHoleAs              = [CGFloat(600), CGFloat(400), CGFloat(320)]
+            blackHoleBs              = [CGFloat(120), CGFloat(80), CGFloat(64)]
+            numsOfAccretionDiskStars = [80, 80, 80]
+            angularVelocities        = [CGFloat(1.0), CGFloat(1.0), CGFloat(1.0), CGFloat(1.0), CGFloat(1.0)]
             centerLocations          = [CGPoint(x: 300, y: 600)]
             centerSizes              = [CGFloat(70)]
-            centerColors             = [UIColor.darkGray]
-            starColors               = [UIColor.yellow, UIColor.yellow, UIColor.yellow]
-            centerZDistance          = CGFloat(2500.0)
+            centerColors             = [UIColor.green]
+            starColors               = [UIColor.purple, UIColor.purple, UIColor.purple]
+            centerZDistance          = CGFloat(5000.0)
         }
     }
 }
@@ -467,8 +506,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var positionLabel : SKLabelNode!
     var centerCrossHair : SKLabelNode!
     var centerPoint     : SKShapeNode!
-    
-    var enemy3WaitTimes : [CGFloat] = [1.1]
     
     var gameStart = false
     
@@ -1797,7 +1834,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             enemy2.physicsBody?.velocity.dy = CGFloat(enemy2JumpSpeed)
         }
         else if player != nil && enemy1 != nil {
-            if Int(player.position.y - enemy1.position.y) >= (playerHeight + enemy1Size[1])/2 - 10 {
+            if Int(player.position.y - enemy1.position.y) >= (playerHeight + enemy1Size[1])/2 - 20 {
                 player.physicsBody?.velocity.dy = CGFloat(jumpSpeed)
                 enemy1.physicsBody?.velocity.dy = 0
                 enemy1.physicsBody?.velocity.dx = 0
@@ -1816,7 +1853,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         else if player != nil && enemy2 != nil {
-            if Int(player.position.y - enemy2.position.y) >= (playerHeight + enemy2Size[1])/2 - 10 {
+            if Int(player.position.y - enemy2.position.y) >= (playerHeight + enemy2Size[1])/2 - 20 {
                 player.physicsBody?.velocity.dy = CGFloat(jumpSpeed)
                 enemy2.physicsBody?.velocity.dy = 0
                 enemy2.physicsBody?.velocity.dx = 0
@@ -1835,7 +1872,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         else if player != nil && enemy3 != nil {
-            if Int(player.position.y - enemy3.position.y) >= (playerHeight + enemy3Size[1])/2 - 10 {
+            if Int(player.position.y - enemy3.position.y) >= (playerHeight + enemy3Size[1])/2 - 20 {
                 player.physicsBody?.velocity.dy = CGFloat(jumpSpeed)
                 enemy3.physicsBody?.velocity.dy = 0
                 enemy3.physicsBody?.velocity.dx = 0
@@ -1885,7 +1922,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func enemy3Clock(i: Int) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + enemy3WaitTimes[i], execute:{
+        DispatchQueue.main.asyncAfter(deadline: .now() + levels[level].enemy3WaitTimes[i], execute:{
             self.enemy3Directions[i] = !self.enemy3Directions[i]
             self.enemy3Clock(i: i)
         })
