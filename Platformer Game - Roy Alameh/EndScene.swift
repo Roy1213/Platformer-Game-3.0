@@ -73,7 +73,7 @@ class EndScene : SKScene {
             gameScene.graphs = scene.graphs
             gameScene.scaleMode = .aspectFill
             if let view = self.view {
-                let transition = SKTransition.fade(withDuration: 3)
+                let transition = SKTransition.fade(withDuration: 1)
                 view.presentScene(gameScene, transition: transition)
                 view.ignoresSiblingOrder = true
                 view.showsFPS = false

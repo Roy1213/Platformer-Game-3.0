@@ -461,7 +461,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var canMove       = true
     var animationRate = 0.001
     
-    let movementOutletSize = 250
+    let movementOutletSize = 175
     
     var rightLeg    : SKShapeNode!
     var leftLeg     : SKShapeNode!
@@ -583,13 +583,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(teleportOutlet)
         
         rightButtonOutlet          = SKLabelNode()
-        rightButtonOutlet.text     = "►"
+        rightButtonOutlet.text     = "◯"
         rightButtonOutlet.name     = "rightButtonOutlet"
         rightButtonOutlet.fontSize = CGFloat(movementOutletSize)
         self.addChild(rightButtonOutlet)
         
         leftButtonOutlet           = SKLabelNode()
-        leftButtonOutlet.text      = "◄"
+        leftButtonOutlet.text      = "◯"
         leftButtonOutlet.name      = "leftButtonOutlet"
         leftButtonOutlet.fontSize  = CGFloat(movementOutletSize)
         self.addChild(leftButtonOutlet)
@@ -601,7 +601,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(smallJumpOutlet)*/
         
         largeJumpOutlet            = SKLabelNode()
-        largeJumpOutlet.text       = "⍙"
+        largeJumpOutlet.text       = "◯"
         largeJumpOutlet.name       = "largeJumpOutlet"
         largeJumpOutlet.fontSize   = CGFloat(movementOutletSize)
         self.addChild(largeJumpOutlet)
@@ -1198,7 +1198,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             torso.isHidden = !torso.isHidden
             head.isHidden = !head.isHidden
             if firstInit && !gameStart{
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
                     self.respawnEffect(count: 1)
                     self.gameStart = false
                 })
@@ -1940,7 +1940,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameScene.graphs = scene.graphs
             gameScene.scaleMode = .aspectFill
             if let view = self.view {
-                let transition = SKTransition.fade(withDuration: 3)
+                let transition = SKTransition.fade(withDuration: 1)
                 view.presentScene(gameScene, transition: transition)
                 view.ignoresSiblingOrder = true
                 view.showsFPS = false
